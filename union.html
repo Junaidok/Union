@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto MoneTag Ads</title>
+
+    <!-- MoneTag Script -->
+    <script src='//whephiwums.com/sdk.js' data-zone='8996413' data-sdk='show_8996413'></script>
+
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Auto MoneTag Ads</h1>
+        <div class="buttons">
+            <!-- Show Rewarded Ad Button -->
+            <button onclick="showRewardedAd()">Show Rewarded Ad</button>
+            
+            <!-- Show Rewarded Popup Button -->
+            <button onclick="showRewardedPopup()">Show Rewarded Popup</button>
+
+            <!-- Show In-App Interstitial Ad Button -->
+            <button onclick="showInAppAd()">Show In-App Interstitial</button>
+
+            <!-- AutoAd Button -->
+            <button onclick="startAutoAds()">AutoAd</button>
+        </div>
+    </div>
+
+    <script>
+        // Rewarded Interstitial Ad
+        function showRewardedAd() {
+            show_8996413().catch(error => {
+                console.error('Ad Error:', error);
+            });
+        }
+
+        // Rewarded Popup Ad
+        function showRewardedPopup() {
+            show_8996413('pop').catch(error => {
+                console.error('Popup Ad Error:', error);
+            });
+        }
+
+        // In-App Interstitial Ad
+        function showInAppAd() {
+            show_8996413({ 
+                type: 'inApp', 
+                inAppSettings: { 
+                    frequency: 2, 
+                    capping: 0.1, 
+                    interval: 30, 
+                    timeout: 5, 
+                    everyPage: false 
+                } 
+            }).catch(error => {
+                console.error('In-App Ad Error:', error);
+            });
+        }
+
+        // Auto Ad Function - Shows Rewarded Interstitial every second for 16 seconds
+        function startAutoAds() {
+            const interval = setInterval(() => {
+                show_8996413().catch(error => {
+                    console.error('Ad Error:', error);
+                });
+            }, 1000); // 1 second interval
+
+            // Stop after 16 seconds
+            setTimeout(() => {
+                clearInterval(interval); // Stops showing ads
+            }, 16000); // Stop after 16 seconds
+        }
+    </script>
+</body>
+</html>
